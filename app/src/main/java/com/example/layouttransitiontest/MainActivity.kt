@@ -90,7 +90,10 @@ class MainActivity : AppCompatActivity() {
       }
 
       val bubbleContainer = RelativeLayout(this).apply {
-//        setBackgroundColor(Color.BLUE)
+        setBackgroundColor(Color.BLUE)
+        layoutTransition = createLayoutTransition()
+//        layoutTransition.setDuration(LayoutTransition.CHANGING, 3000)
+//        mContainer.layoutTransition.setDuration(LayoutTransition.CHANGING, 3000)
       }
       bubbleContainer.addView(bubble,
           RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams
@@ -111,6 +114,9 @@ class MainActivity : AppCompatActivity() {
             Log.i("min", "width: $width, height: $height, x: ${it.x}, y: ${it.y}")
           }
           bubbleContainer.requestLayout()
+//          bubbleContainer.layoutTransition.setDuration(3000)
+
+          bubble.animate().rotation(360f).start()
         }
       }
 
@@ -150,7 +156,7 @@ class MainActivity : AppCompatActivity() {
 
   private fun createBubbleTransition(): LayoutTransition {
     val layoutTransition = LayoutTransition()
-//    layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+    layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
     val addAnimator = ObjectAnimator.ofFloat(null, View.TRANSLATION_X, 0f, 400f, 0f)
         .setDuration(1500)
     layoutTransition.setAnimator(LayoutTransition.DISAPPEARING, addAnimator)
